@@ -38,7 +38,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -47,6 +54,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -64,10 +72,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="IntoXWindow.cpp" />
+    <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StringPtrHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="IntoXWindow.h" />
+    <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="stdfax.h" />
+    <ClInclude Include="StringPtrHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Readme.txt" />

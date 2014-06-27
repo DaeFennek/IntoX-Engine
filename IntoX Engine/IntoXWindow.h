@@ -1,0 +1,33 @@
+#ifndef __INTOXWINDOWS_H__
+#define __INTOXWINDOWS_H__
+
+#include <SDL.h>
+#include <iostream>
+
+// forward decleration of class InputHandler because of circular include
+class InputHandler;
+
+class IntoXWindow
+{
+	public:
+		IntoXWindow(char* pCaption, int pWidth, int pHeight);
+		~IntoXWindow();
+		int Init();
+		void Show();
+		void Hide();
+		void Quit();
+
+	protected:
+		int width;
+		int height;
+		char* caption;
+		SDL_Surface* mainScreen;
+		InputHandler *keyboardHandler;
+
+	private:
+		void Run();
+
+};
+
+
+#endif //__INTOXWINDOWS_H__

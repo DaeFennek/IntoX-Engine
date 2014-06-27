@@ -18,9 +18,33 @@
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="IntoXWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="StringPtrHelper.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardHandler.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdfax.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IntoXWindow.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="StringPtrHelper.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardHandler.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
