@@ -54,7 +54,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;OpenGL32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,12 +76,14 @@
     <ClCompile Include="IntoXWindow.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenGLHelper.cpp" />
     <ClCompile Include="StringPtrHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IntoXWindow.h" />
     <ClInclude Include="KeyboardHandler.h" />
+    <ClInclude Include="OpenGLhelper.h" />
     <ClInclude Include="stdfax.h" />
     <ClInclude Include="StringPtrHelper.h" />
   </ItemGroup>

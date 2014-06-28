@@ -1,5 +1,6 @@
 #include "IntoXWindow.h"
 #include "KeyboardHandler.h"
+#include "OpenGLhelper.h"
 
 IntoXWindow::~IntoXWindow() 
 {
@@ -34,12 +35,24 @@ void IntoXWindow::Show()
 	// if mainScreen not created then create
 	if (mainScreen != NULL)
 	{
+		SDL_WM_SetCaption(this->caption, NULL);
 		mainScreen = SDL_SetVideoMode(this->width, this->height, 32, SDL_SWSURFACE | SDL_OPENGL);
 		if (mainScreen == NULL)
 		{
 			Quit();
 		}
-	}
+		
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		
+		ClearMainGLBufferBuffers();
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(45.0, this->width / this->height, 1.0, 500.0);
+		glViewport(0, 0, this->width, this->height);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glEnable(GL_DEPTH_TEST);
+}
 
 	this->Run();
 }
@@ -58,6 +71,21 @@ void IntoXWindow::Run()
 	{
 		if (this->keyboardHandler->HandleInput(&sdlEvent) > 0)
 			keepRunning = false;
+		ClearMainGLBufferBuffers();
+		
+		// test that checks that OpenGL works correnctly
+		glBegin(GL_QUADS);
+			glColor3d(1,0,0);
+			glVertex3f(-1,-1,-10);
+			glColor3d(1,1,0);
+			glVertex3f(1,-1,-10);
+			glColor3d(1,1,1);
+			glVertex3f(1,1,-15);
+			glColor3d(0,1,1);
+			glVertex3f(-1,1,-15);
+		glEnd();
+
+		SDL_GL_SwapBuffers();
 	}
 	Quit();
 }

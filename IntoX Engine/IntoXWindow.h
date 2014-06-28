@@ -2,6 +2,7 @@
 #define __INTOXWINDOWS_H__
 
 #include <SDL.h>
+#include <SDL_opengl.h>
 #include <iostream>
 
 // forward decleration of class InputHandler because of circular include
@@ -20,7 +21,7 @@ class IntoXWindow
 	protected:
 		int width;
 		int height;
-		char* caption;
+		char* caption;		
 		SDL_Surface* mainScreen;
 		InputHandler *keyboardHandler;
 
