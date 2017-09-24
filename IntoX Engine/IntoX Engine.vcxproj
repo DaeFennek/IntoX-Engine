@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -21,7 +29,20 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
@@ -34,15 +55,29 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\C++ libs\SDL2_image-2.0.1\include;F:\C++ libs\glm;F:\C++ libs\Boost 1.60\boost_1_60_0;F:\C++ libs\glew-1.13.0\include;F:\C++ libs\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\C++ libs\SDL2_image-2.0.1\lib\x86;F:\C++ libs\glew-1.13.0\lib\Release\Win32;F:\C++ libs\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>F:\C++ libs\SDL2_image-2.0.1\include;F:\C++ libs\glm;F:\C++ libs\Boost 1.60\boost_1_60_0;F:\C++ libs\glew-1.13.0\include;F:\C++ libs\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\C++ libs\SDL2_image-2.0.1\lib\x64;F:\C++ libs\glew-1.13.0\lib\Release\x64;F:\C++ libs\SDL2-2.0.3\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Kevin\Desktop\IntoX Engine\IntoX Engine\libs\SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -54,7 +89,18 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;OpenGL32.lib;glu32.lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;OpenGL32.lib;glu32.lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,24 +117,73 @@
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DebugLog.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="InputEventController.cpp" />
+    <ClCompile Include="FileHelper.cpp" />
+    <ClCompile Include="Frustrum.cpp" />
     <ClCompile Include="IntoXWindow.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
+    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenGLMasterRenderer.cpp" />
+    <ClCompile Include="MathHelper.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="OpenGLHelper.cpp" />
-    <ClCompile Include="StringPtrHelper.cpp" />
+    <ClCompile Include="OpenGLRenderContext.cpp" />
+    <ClCompile Include="ShaderAttributeLocationBinder.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="WindowEventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="AABB.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="DebugLog.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="InputEventController.h" />
+    <ClInclude Include="FileHelper.h" />
+    <ClInclude Include="Frustrum.h" />
+    <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="IntoXWindow.h" />
     <ClInclude Include="KeyboardHandler.h" />
-    <ClInclude Include="OpenGLhelper.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="OpenGLMasterRenderer.h" />
+    <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="OpenGLHelper.h" />
+    <ClInclude Include="OpenGLRenderContext.h" />
+    <ClInclude Include="ShaderAttributeLocationBinder.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="stdfax.h" />
-    <ClInclude Include="StringPtrHelper.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="WindowEventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FragmentShader.glsl" />
+    <None Include="VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

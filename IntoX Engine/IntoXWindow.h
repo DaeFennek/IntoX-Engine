@@ -1,37 +1,32 @@
-#ifndef __INTOXWINDOWS_H__
-#define __INTOXWINDOWS_H__
+#pragma once
 
+#include "stdfax.h"
 #include <SDL.h>
 #include <SDL_opengl.h>
-#include <gl\GLU.h>
-#include <iostream>
-
-// forward decleration of class InputHandler because of circular include
-class InputHandler;
+#include "InputEventController.h"
 
 class IntoXWindow
 {
 	public:
-		IntoXWindow(char* pCaption, int pWidth, int pHeight);
+		IntoXWindow(std::string caption, int width, int height);
 		~IntoXWindow();
-		int Init();
-		void Show();
-		void Hide();
-		void Quit();
+		void Init();
+		void Show();		
+		void Quit();		
+		void OnResize();
+
+		int GetWidth() const;
+		int GetHeight() const;
+
 
 	protected:
-		int width;
-		int height;
-		char* caption;		
-		//SDL_Surface* mainScreen;
-		SDL_Window *window;
-		SDL_GLContext context;
-		InputHandler *keyboardHandler;
+		int m_Width;
+		int m_Height;
+		std::string m_Caption;				
+		SDL_Window *m_SDLWindowPtr = NULL;
+		class InputEventController *m_EventControllerPtr = NULL;				
 
 	private:
-		void Run();
+		void Run();	
 
 };
-
-
-#endif //__INTOXWINDOWS_H__

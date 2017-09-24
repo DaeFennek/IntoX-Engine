@@ -1,120 +1,174 @@
 #include "IntoXWindow.h"
-#include "KeyboardHandler.h"
-#include "OpenGLhelper.h"
-
-using namespace std;
+#include "OpenGLHelper.h"
+#include <vector>
+#include "Model.h"
+#include "Entity.h"
+#include "OpenGLMasterRenderer.h"
+#include "Loader.h"
+#include "ShaderAttributeLocationBinder.h"
+#include "ShaderProgram.h"
+#include "Camera.h"
+#include "Texture.h"
+#include "Frustrum.h"
 
 IntoXWindow::~IntoXWindow() 
 {
-	cout << "Window destructor called" << endl;
-	// Todo: to be continue .. 
-
-	if (this->keyboardHandler != NULL)
-		delete this->keyboardHandler;
-}
-
-IntoXWindow::IntoXWindow(char* pCaption, int pWidth, int pHeight) : caption(pCaption), height(pHeight), width(pWidth) 
-{
-	this->window = NULL;
-	this->context = NULL;
-}
-
-
-int IntoXWindow::Init()
-{
 	
-	int sdlInitCode = SDL_Init(SDL_INIT_EVERYTHING);
-	if (sdlInitCode > 0)
+}
+
+IntoXWindow::IntoXWindow(std::string caption, int width, int height) : m_Caption(caption), m_Height(height), m_Width(width) 
+{	
+	
+}
+
+
+void IntoXWindow::Init()
+{	
+	int errorCode = SDL_Init(SDL_INIT_EVERYTHING);
+	if (errorCode > 0)
 	{
-		return sdlInitCode;
+		DebugLog::Print(std::string("Failed to initialize SDL: Error ") + std::to_string(errorCode), DebugLog::ERROR_LOG);
 	}
-
-	this->keyboardHandler = new KeyboardHandler(this);
+	else
+	{
+		DebugLog::Print("Initialized SDL", DebugLog::DEFAULT_LOG);
+		m_EventControllerPtr = new InputEventController(this);
+	}		
 }
 
-void IntoXWindow::Hide() 
-{
-
-}
 
 void IntoXWindow::Show() 
 {
-	// if mainScreen not created then create
-	
-	if (!window)
+	if (m_SDLWindowPtr)
 	{
-		window = SDL_CreateWindow(this->caption, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->width, this->height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-		if (!window)
-		{
-			cerr << "Could not create window: " << SDL_GetError();
-			Quit();
-		}
-		context = SDL_GL_CreateContext(window);
-
-		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-		SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);	
-		
-		ClearMainGLBufferBuffers();
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(45., this->width / this->height, 1.0, 500.0);
-		glViewport(0, 0, this->width, this->height);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glEnable(GL_DEPTH_TEST);
-
-	}
+		return;
+	}	
 	
-	this->Run();
+	m_SDLWindowPtr = SDL_CreateWindow(m_Caption.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_Width, m_Height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	if (!m_SDLWindowPtr)
+	{		
+		DebugLog::Print( "Could not create window :  " + std::string(SDL_GetError()), DebugLog::ERROR_LOG);		
+		return;
+	}
+
+	Run();
 }
 
 void IntoXWindow::Quit()
 {
-	std::cout << "Close called" << std::endl;
-	if (context)
+	DebugLog::Print("Close Window", DebugLog::DEFAULT_LOG);	
+	
+	if (m_EventControllerPtr)
 	{
-		SDL_GL_DeleteContext(context);
+		delete m_EventControllerPtr;
 	}
-	if (window)
+
+	if (m_SDLWindowPtr)
 	{
-		SDL_DestroyWindow(window);
+		SDL_DestroyWindow(m_SDLWindowPtr);
 	}
 	SDL_Quit();
 }
 
+
 void IntoXWindow::Run()
 {
-	SDL_Event sdlEvent;
-	bool keepRunning = true;
-	while(keepRunning)
-	{
-		if (this->keyboardHandler->HandleInput(&sdlEvent) > 0)
-			keepRunning = false;
-		ClearMainGLBufferBuffers();
-		
-		/*glClearColor(1.0f, 0.f, 0.f, 1.0f);
-		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);*/
+	OpenGLRenderContext context(*m_SDLWindowPtr);
+	if (context.Init())
+	{		
+		context.SetPreRenderCallback([&]() { m_EventControllerPtr->Update(); });
+		context.Exec();
+	}	
+	
 
-		// test that checks that OpenGL works correnctly
-		glBegin(GL_QUADS);
-			glColor3d(1,0,0);
-			glVertex3f(-1,-1,-10);
-			glColor3d(1,1,0);
-			glVertex3f(1,-1,-10);
-			glColor3d(1,1,1);
-			glVertex3f(1,1,-15);
-			glColor3d(0,1,1);
-			glVertex3f(-1,1,-15);
-		glEnd();
+	
 
-		SDL_GL_SwapWindow(this->window);
+	/*while(bRun)
+	{		
+		startclock = SDL_GetTicks();		
+
+		/*if (startclock - lastLoopUpdateTime >= 20)
+		{
+			bRun = m_pEventController->Update();
+
+			const Uint8 *keys = SDL_GetKeyboardState(nullptr);
+
+			if (keys[SDL_SCANCODE_W])
+			{
+				camera.UpdatePosition(glm::vec3(0.0f, -.2f, .0f));
+			}
+			if (keys[SDL_SCANCODE_A])
+			{
+				camera.UpdatePosition(glm::vec3(.2f, 0.0f, .0f));
+			}
+			if (keys[SDL_SCANCODE_S])
+			{
+				camera.UpdatePosition(glm::vec3(0.f, .2f, 0.f));
+			}
+			if (keys[SDL_SCANCODE_D])
+			{
+				camera.UpdatePosition(glm::vec3(-.2f, 0.0f, .0f));
+			}
+
+			if (keys[SDL_SCANCODE_UP])
+			{
+				camera.UpdatePitch(-0.5f);
+			}
+			if (keys[SDL_SCANCODE_LEFT])
+			{
+				camera.UpdateYaw(-0.5f);
+			}
+			if (keys[SDL_SCANCODE_DOWN])
+			{
+				camera.UpdatePitch(0.5f);
+			}
+			if (keys[SDL_SCANCODE_RIGHT])
+			{
+				camera.UpdateYaw(0.5f);
+			}		
+		}
 		
+
+		/*glm::mat4 pMtx = renderer.GetProjectionMatrix();
+		glm::mat4 modelViewMtx = camera.GetViewMatrix() * entity.GetModelMatrix();
+
+		renderer.AddEntity(entity);		
+
+		renderer.ClearBuffers();
+		shader->Start();
+		shader->LoadUniformMatrix4f("viewMatrix", camera.GetViewMatrix());				
+		renderer.Render(*shader);
+		shader->Stop();
+		renderer.ClearRenderList();
+		
+		//SDL_GL_SwapWindow(m_pSDLWindow);
+
+		deltaclock = SDL_GetTicks() - startclock;
+		if ( deltaclock > 0)
+		{	
+			currentFPS = 1000 / deltaclock;
+		}
+		
+		SDL_SetWindowTitle(m_pSDLWindow, (m_caption + "; FPS: " + std::to_string(currentFPS)).c_str());
 	}
-	Quit();
+	*/
+	
+//	loader.Clean();
+	
+}
+
+void IntoXWindow::OnResize()
+{	
+	SDL_GetWindowSize(m_SDLWindowPtr, &m_Width, &m_Height);
+}
+
+int IntoXWindow::GetWidth() const
+{
+	return m_Width;
+}
+
+
+int IntoXWindow::GetHeight() const
+{
+	return m_Height;
 }

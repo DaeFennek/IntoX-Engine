@@ -3,59 +3,54 @@
 
 
 
-KeyboardHandler::KeyboardHandler(IntoXWindow *pIntoXWindow) : InputHandler(pIntoXWindow)
-{
-
+KeyboardHandler::KeyboardHandler(class IntoXWindow *pWindow) : m_pWindow(pWindow)
+{	
+	for (unsigned short i = 0; i < sizeof(m_keymap) / sizeof(bool); i++)
+	{
+		m_keymap[i] = false;
+	}
 }
 
 KeyboardHandler::~KeyboardHandler() 
 {
-	std::cout << "KeyboardHandler dctr called" << std::endl;
+	
 }
 
 
-
-int KeyboardHandler::HandleInput(SDL_Event *sdlEvent) 
+bool KeyboardHandler::HandleEvent(SDL_Event *pSdlEvent)
 {
-	int status = 0;
-	while(SDL_PollEvent(sdlEvent))
+	
+	bool status = true;	
+	switch (pSdlEvent->key.type)
 	{
-		switch (sdlEvent->key.type)
-		{
-			case SDL_QUIT:
-				// ptr to window and call destructor				
-				status = 1;
-				break;
+		case SDL_KEYDOWN:
+			status = HandleKeyDown(pSdlEvent);
+			break;
 
-			case SDL_KEYDOWN:
-				status = this->HandleKeyDown(sdlEvent);
-				break;
-
-			case SDL_KEYUP:
-				status = this->HandleKeyUp(sdlEvent);
-				break;
-		}
-	}
+		case SDL_KEYUP:
+			status = HandleKeyUp(pSdlEvent);
+			break;
+	}	
 	return status;
 }
 
-int KeyboardHandler::HandleKeyDown(SDL_Event *sdlEvent) 
+bool KeyboardHandler::HandleKeyDown(SDL_Event *pSdlEvent) 
 {
-	int status = 0;
-	switch (sdlEvent->key.keysym.sym)
+	bool status = true;
+	
+	return status;
+}
+
+bool KeyboardHandler::HandleKeyUp(SDL_Event *pSdlEvent)
+{
+	bool status = true;
+	
+	switch (pSdlEvent->key.keysym.sym)
 	{
 		case SDLK_ESCAPE:
-			// ptr to window and call destructor
-			status = true;
+			status = false;
 			break;
-		
 	}
+
 	return status;
-
-}
-
-int KeyboardHandler::HandleKeyUp(SDL_Event *sdlEvent)
-{
-	// TODOs
-	return 0;
 }

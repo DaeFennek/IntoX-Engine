@@ -1,20 +1,18 @@
-#ifndef __KEYBOARDHANDLER_H__
-#define __KEYBOARDHANDLER_H__
+#pragma once
+#include "IEventHandler.h"
+#include "IntoXWindow.h"
 
-#include "InputHandler.h"
-
-
-class KeyboardHandler : public InputHandler
+class KeyboardHandler : public IEventHandler
 {
 	public:
-		KeyboardHandler(IntoXWindow *pIntoXWindow);
+		KeyboardHandler(class IntoXWindow *pWindow);
 		virtual ~KeyboardHandler();
-		virtual int HandleInput(SDL_Event *sdlEvent);
+		virtual bool HandleEvent(SDL_Event *sdlEvent);
 	protected:
+		bool m_keymap[283];
 	private:
-		int HandleKeyDown(SDL_Event *sdlEvent);
-		int HandleKeyUp(SDL_Event *sdlEvent);
+		bool HandleKeyDown(SDL_Event *pSdlEvent);
+		bool HandleKeyUp(SDL_Event *pSdlEvent);
+		class IntoXWindow *m_pWindow;	
 
 };
-
-#endif //__KEYBOARDHANDLER_H__

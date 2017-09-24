@@ -1,8 +1,6 @@
-#ifndef __OPENGLHELPER_H__
-#define __OPENGLHELPER_H__
+#pragma once
 
+#include "stdfax.h"
 #include <SDL_opengl.h>
 
-void ClearMainGLBufferBuffers();
-
-#endif //__OPENGLHELPER_H__
+std::string GetOpenGLVersion();
