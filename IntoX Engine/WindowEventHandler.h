@@ -1,17 +1,23 @@
 #pragma once
 
-#include "IEventHandler.h"
-#include "IntoXWindow.h"
+#include "Engine.h"
 
-class WindowEventHandler : public IEventHandler
+class WindowEventHandler
 {	
 
 public:
-	WindowEventHandler(class IntoXWindow *pWindow);
-	~WindowEventHandler();
-	virtual bool HandleEvent(SDL_Event *pSdlEvent);
+	WindowEventHandler() {}
+	~WindowEventHandler() {}
 
-private:
-	class IntoXWindow *m_pWindow;
+	void HandleEvent(SDL_Event *pSdlEvent)
+	{
+		switch (pSdlEvent->window.event)
+		{
+		case SDL_WINDOWEVENT_RESIZED:
+			ENGINE_BROADCAST(Message(MSG_RESIZE_WINDOW));
+			break;
+
+		}		
+	}
 };
 

@@ -2,19 +2,19 @@
 #include <GL\glew.h>
 #include "FileHelper.h"
 
-ShaderProgram::ShaderProgram(unsigned int programID, unsigned int vertexShaderID, unsigned int fragmentShaderID, class ShaderAttributeLocationBinder* shaderAttributeLocationBinder) : m_programID(programID), m_vertexShaderID(vertexShaderID), m_fragmentShaderID(fragmentShaderID), m_shaderVarBinder(shaderAttributeLocationBinder)
+ShaderProgram::ShaderProgram(unsigned int programID, unsigned int vertexShaderID, unsigned int fragmentShaderID, ShaderAttributeLocationBinder shaderAttributeLocationBinder) : m_programID(programID), m_vertexShaderID(vertexShaderID), m_fragmentShaderID(fragmentShaderID), m_shaderVarBinder(shaderAttributeLocationBinder)
 {
 
 }
 
-std::unique_ptr<ShaderProgram> ShaderProgram::Create(std::string vertexFile, std::string fragmentFile, class ShaderAttributeLocationBinder* shaderAttributeLocationBinder)
+std::unique_ptr<ShaderProgram> ShaderProgram::Create(std::string vertexFile, std::string fragmentFile, ShaderAttributeLocationBinder shaderAttributeLocationBinder)
 {	
 	unsigned int programID, vertexShaderID, fragmentShaderID;
 
 	vertexShaderID = LoadShader(vertexFile, GL_VERTEX_SHADER);
 	fragmentShaderID = LoadShader(fragmentFile, GL_FRAGMENT_SHADER);
-
 	programID = glCreateProgram();
+
 
 	std::unique_ptr<ShaderProgram> pShaderProgram(new ShaderProgram(programID, vertexShaderID, fragmentShaderID, shaderAttributeLocationBinder));
 
@@ -109,33 +109,21 @@ unsigned int ShaderProgram::LoadShader(const std::string& file, unsigned int sha
 
 
 void ShaderProgram::LoadAllAttributes()
-{
-	if (m_shaderVarBinder)
-	{
-		m_shaderVarBinder->BindAttributes(m_programID);
-	}	
+{	
+	m_shaderVarBinder.BindAttributes(m_programID);		
 }
 
 void ShaderProgram::LoadAllUniformLocations()
-{
-	if (m_shaderVarBinder)
-	{
-		m_shaderVarBinder->LoadAllUniformLocations(m_programID);
-	}
+{	
+	m_shaderVarBinder.LoadAllUniformLocations(m_programID);	
 }
 
 void ShaderProgram::LoadUniformVector3f(std::string uniform, glm::vec3 vector)
-{
-	if (m_shaderVarBinder)
-	{
-		m_shaderVarBinder->LoadUniformVector3(uniform, vector);
-	}	
+{	
+	m_shaderVarBinder.LoadUniformVector3(uniform, vector);		
 }
 
 void ShaderProgram::LoadUniformMatrix4f(std::string uniform, glm::mat4 matrix)
-{
-	if (m_shaderVarBinder)
-	{
-		m_shaderVarBinder->LoadUniformMatrix(uniform, matrix);
-	}	
+{	
+	m_shaderVarBinder.LoadUniformMatrix(uniform, matrix);		
 }

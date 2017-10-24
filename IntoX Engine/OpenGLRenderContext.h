@@ -2,31 +2,41 @@
 
 #include "stdfax.h"
 #include "OpenGLMasterRenderer.h"
-#include <functional>
+#include "IOpenGLRenderer.h"
+#include "Camera.h"
+#include "Loader.h"
+#include "ShaderProgram.h"
+#include "Engine.h"
 
-class OpenGLRenderContext
+class OpenGLRenderContext : public IMessageHandler, public IOpenGLRenderer
 {
 public:
 	OpenGLRenderContext(SDL_Window& window);
 	~OpenGLRenderContext();
 
-	bool Init();
-	void Exec();
+	bool Init() override;	
+	void Render() override;
 
-	inline void SetPreRenderCallback(std::function<void(void)> preRenderCallback) { m_PreRenderCallback = preRenderCallback; }
-	inline void SetPostRenderCallback(std::function<void(void)> postRenderCallback) { m_PostRenderCallback = postRenderCallback; }
 
 	float GetHeight() const;
 	float GetWidth() const;
 
-private:	
-	std::unique_ptr<class OpenGLMasterRenderer> m_OpenGLMasterRendererPtr;
-	bool m_bRender = false;
-	SDL_GLContext m_GLContext;
-	SDL_Window& m_Window;
 
-	std::function<void(void)> m_PreRenderCallback = [](){};
-	std::function<void(void)> m_PostRenderCallback = [](){};
-	
+	virtual void HandleMessage(const Message& msg) override;
+
+private:
+	std::unique_ptr<class OpenGLMasterRenderer> m_OpenGLMasterRendererPtr;		
+	SDL_GLContext m_GLContext;
+	SDL_Window& m_Window;	
+
+	unsigned int m_startclock = 0;
+	unsigned int m_deltaclock = 0;
+	unsigned int m_currentFPS = 0;
+
+	// just here for testing, make dynamic later!
+	Camera m_camera;
+	Loader m_loader;	
+	std::unique_ptr<class ShaderProgram> m_shader; 
+	Entity* m_pEntity;
 };
 

@@ -1,32 +1,29 @@
 #pragma once
 
-#include "stdfax.h"
-#include <SDL.h>
-#include <SDL_opengl.h>
-#include "InputEventController.h"
+#include "Engine.h"
+#include "IMessageHandler.h"
 
-class IntoXWindow
+class IntoXWindow : public IMessageHandler
 {
 	public:
 		IntoXWindow(std::string caption, int width, int height);
 		~IntoXWindow();
-		void Init();
+		
 		void Show();		
 		void Quit();		
 		void OnResize();
 
+		virtual void HandleMessage(const Message& msg) override;
+
 		int GetWidth() const;
-		int GetHeight() const;
+		int GetHeight() const;	
 
 
 	protected:
 		int m_Width;
 		int m_Height;
 		std::string m_Caption;				
-		SDL_Window *m_SDLWindowPtr = NULL;
-		class InputEventController *m_EventControllerPtr = NULL;				
-
-	private:
-		void Run();	
+		SDL_Window *m_SDLWindowPtr = nullptr;					
+		class OpenGLRenderContext* m_glContextPtr = nullptr;
 
 };

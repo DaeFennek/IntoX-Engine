@@ -40,7 +40,7 @@ void OpenGLMasterRenderer::Render(class ShaderProgram& shader)
 {
 	PrepareRenderList(shader);
 			
-	for (auto entry : m_RenderList)
+	for (auto& entry : m_RenderList)
 	{
 		auto modelPtr = entry.first;
 		PrepareModel(*modelPtr);		

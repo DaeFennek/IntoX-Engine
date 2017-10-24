@@ -52,12 +52,15 @@
     <Filter Include="Quelldateien\core\collision">
       <UniqueIdentifier>{487fa733-efce-47ca-ad29-938a35cd02ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\core\message">
+      <UniqueIdentifier>{5d4b71fd-5f4a-41a7-9f87-d174f1300ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\core\message">
+      <UniqueIdentifier>{2701a6b0-11f4-4096-bfa3-42a4bc5753cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IntoXWindow.cpp">
-      <Filter>Quelldateien\core</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardHandler.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -67,9 +70,6 @@
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
     <ClCompile Include="DebugLog.cpp">
-      <Filter>Quelldateien\core</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowEventHandler.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
@@ -111,10 +111,16 @@
     <ClCompile Include="OpenGLMasterRenderer.cpp">
       <Filter>Quelldateien\core\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="InputEventController.cpp">
+    <ClCompile Include="Engine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>Quelldateien\core\message</Filter>
+    </ClCompile>
+    <ClCompile Include="IMessageHandler.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
-    <ClCompile Include="EventManager.cpp">
+    <ClCompile Include="IOpenGLRenderer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,9 +138,6 @@
       <Filter>Headerdateien\core</Filter>
     </ClInclude>
     <ClInclude Include="WindowEventHandler.h">
-      <Filter>Headerdateien\core</Filter>
-    </ClInclude>
-    <ClInclude Include="IEventHandler.h">
       <Filter>Headerdateien\core</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
@@ -179,11 +182,23 @@
     <ClInclude Include="OpenGLMasterRenderer.h">
       <Filter>Headerdateien\core\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="InputEventController.h">
+    <ClInclude Include="Engine.h">
       <Filter>Headerdateien\core</Filter>
     </ClInclude>
-    <ClInclude Include="EventManager.h">
+    <ClInclude Include="Message.h">
+      <Filter>Headerdateien\core\message</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessageHandler.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLEventManager.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="IOpenGLRenderer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMessage.h">
+      <Filter>Headerdateien\core\message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

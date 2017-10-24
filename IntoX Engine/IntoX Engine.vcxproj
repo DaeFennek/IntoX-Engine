@@ -135,15 +135,16 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DebugLog.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="InputEventController.cpp" />
     <ClCompile Include="FileHelper.cpp" />
     <ClCompile Include="Frustrum.cpp" />
+    <ClCompile Include="IMessageHandler.cpp" />
     <ClCompile Include="IntoXWindow.cpp" />
-    <ClCompile Include="KeyboardHandler.cpp" />
+    <ClCompile Include="IOpenGLRenderer.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Message.cpp" />
     <ClCompile Include="OpenGLMasterRenderer.cpp" />
     <ClCompile Include="MathHelper.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -152,21 +153,23 @@
     <ClCompile Include="ShaderAttributeLocationBinder.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="WindowEventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DebugLog.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="EventManager.h" />
-    <ClInclude Include="InputEventController.h" />
+    <ClInclude Include="IOpenGLRenderer.h" />
+    <ClInclude Include="KeyMessage.h" />
+    <ClInclude Include="SDLEventManager.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="Frustrum.h" />
-    <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="IntoXWindow.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Loader.h" />
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="IMessageHandler.h" />
     <ClInclude Include="OpenGLMasterRenderer.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Model.h" />

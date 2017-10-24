@@ -10,7 +10,6 @@
 #include <iostream>
 #include <string>
 #include "DebugLog.h"
-#include "EventManager.h"
 
 
 #endif //__STDFAX_H__

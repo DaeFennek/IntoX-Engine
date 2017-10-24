@@ -1,18 +1,21 @@
 #pragma once
-#include "IEventHandler.h"
-#include "IntoXWindow.h"
 
-class KeyboardHandler : public IEventHandler
+#include "Engine.h"
+#include "KeyMessage.h"
+
+class KeyboardHandler
 {
 	public:
-		KeyboardHandler(class IntoXWindow *pWindow);
-		virtual ~KeyboardHandler();
-		virtual bool HandleEvent(SDL_Event *sdlEvent);
-	protected:
-		bool m_keymap[283];
-	private:
-		bool HandleKeyDown(SDL_Event *pSdlEvent);
-		bool HandleKeyUp(SDL_Event *pSdlEvent);
-		class IntoXWindow *m_pWindow;	
+		KeyboardHandler() {}
+		~KeyboardHandler() {}
 
+		void HandleKeyDown(SDL_Event *pSdlEvent)
+		{
+			ENGINE_BROADCAST(KeyMessage(MSG_KEY_DOWN, SDL_GetKeyboardState(nullptr)));
+		}
+
+		void HandleKeyUp(SDL_Event *pSdlEvent)
+		{
+			ENGINE_BROADCAST(KeyMessage(MSG_KEY_UP, SDL_GetKeyboardState(nullptr)));
+		}
 };
