@@ -9,14 +9,9 @@
 #define WARNING_COLOR 14
 #define ERROR_COLOR 12
 
-DebugLog::DebugLog()
-{
-}
+DebugLog::DebugLog() {}
 
-
-DebugLog::~DebugLog()
-{
-}
+DebugLog::~DebugLog() {}
 
 void DebugLog::Print(std::string log, Type logType)
 {

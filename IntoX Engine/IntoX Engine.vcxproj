@@ -133,7 +133,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="BehaviorTree.cpp" />
+    <ClCompile Include="Blackboard.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CompositeNode.cpp" />
+    <ClCompile Include="ConditionNode.cpp" />
     <ClCompile Include="DebugLog.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -150,18 +154,32 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="OpenGLHelper.cpp" />
     <ClCompile Include="OpenGLRenderContext.cpp" />
+    <ClCompile Include="RepeaterDecoratorNode.cpp" />
     <ClCompile Include="ShaderAttributeLocationBinder.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="ActionNode.h" />
+    <ClInclude Include="BehaviorTree.h" />
+    <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ChildNode.h" />
+    <ClInclude Include="CompositeNode.h" />
+    <ClInclude Include="ConditionNode.h" />
     <ClInclude Include="DebugLog.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="IConditionNode.h" />
+    <ClInclude Include="InverterDecoratorNode.h" />
     <ClInclude Include="IOpenGLRenderer.h" />
     <ClInclude Include="KeyMessage.h" />
+    <ClInclude Include="MultipleChildNode.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="PrioritySelectorNode.h" />
+    <ClInclude Include="PrioritySequenceNode.h" />
+    <ClInclude Include="RepeaterDecoratorNode.h" />
     <ClInclude Include="SDLEventManager.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="Frustrum.h" />
@@ -175,8 +193,11 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="OpenGLHelper.h" />
     <ClInclude Include="OpenGLRenderContext.h" />
+    <ClInclude Include="SelectorNode.h" />
+    <ClInclude Include="SequenceNode.h" />
     <ClInclude Include="ShaderAttributeLocationBinder.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="SingleChildNode.h" />
     <ClInclude Include="stdfax.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="WindowEventHandler.h" />

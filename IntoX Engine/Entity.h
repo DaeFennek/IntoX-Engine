@@ -7,7 +7,7 @@ class Entity
 {
 public:
 	Entity(class Model* model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
-	~Entity();
+	virtual ~Entity();
 
 	class Model* GetModel() const;
 	glm::vec3 GetPosition() const;
@@ -23,8 +23,11 @@ public:
 
 	std::string GetPositionAsString();
 
+	inline const std::string& GetName() const { return m_Name; }
+
 protected:
 	class Model* m_model = NULL;
 	glm::vec3 m_position, m_rotation, m_scale;
+	std::string m_Name;
 };
 

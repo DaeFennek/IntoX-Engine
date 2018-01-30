@@ -58,6 +58,12 @@
     <Filter Include="Quelldateien\core\message">
       <UniqueIdentifier>{2701a6b0-11f4-4096-bfa3-42a4bc5753cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\core\ai">
+      <UniqueIdentifier>{1f89bb93-645a-4128-a570-50e1aa915c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\core\ai">
+      <UniqueIdentifier>{3d37d3e6-fdd0-43d6-a832-5afc5cd8fc4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IntoXWindow.cpp">
@@ -122,6 +128,21 @@
     </ClCompile>
     <ClCompile Include="IOpenGLRenderer.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree.cpp">
+      <Filter>Quelldateien\core\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="Blackboard.cpp">
+      <Filter>Quelldateien\core\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="CompositeNode.cpp">
+      <Filter>Quelldateien\core\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionNode.cpp">
+      <Filter>Quelldateien\core\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="RepeaterDecoratorNode.cpp">
+      <Filter>Quelldateien\core\ai</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +220,54 @@
     </ClInclude>
     <ClInclude Include="KeyMessage.h">
       <Filter>Headerdateien\core\message</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="Blackboard.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="CompositeNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="IConditionNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="InverterDecoratorNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="MultipleChildNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="PrioritySelectorNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="PrioritySequenceNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="RepeaterDecoratorNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectorNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SequenceNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleChildNode.h">
+      <Filter>Headerdateien\core\ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
